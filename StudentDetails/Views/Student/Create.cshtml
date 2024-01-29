@@ -45,7 +45,7 @@
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                 <select asp-for="Subject" id="drpsub" class="form-control"></select>
-                <span asp-validation-for="Subject" class="text-danger"></span>
+                <span asp-validation-for="Subject" id="drpsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="button" value="Create" id="create" class="btn btn-primary" />
@@ -165,7 +165,7 @@
             debugger;
             if (dob === "" || dob == "0001-01-01T00:00")
             {
-                spandob.innerText = "Please Enter Your DOB";
+                spandob.innerText = "Please Enter Your Date Of Birth";
                 spandob.style.display = "block";
                 isvalid = false;
             }
@@ -173,16 +173,22 @@
                 spandob.style.display = "none";
             }
 
-                var spansub = document.getElementById("txtsubject");
+              
 
-                if (sub >= 0 || sub == "Please select") {
-                    spansub.innerText = "Please Enter Your Subject";
-                    spansub.style.display = "block";
-                    isvalid = false;
-                }
-                else {
-                    spansub.style.display = "none";
-                }
+            var spansub = document.getElementById("drpsub");
+            var sub = spansub.options[spansub.selectedIndex].value;
+            var spansubject = document.getElementById("drpsubject");
+            if (sub == "" || sub == -1 || sub == 0) {
+                spansub.style.borderColor = "red";
+                spansubject.innerText = "Please Enter Your Subject";
+                spansubject.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spansubject.style.borderColor = "black";
+                spansubject.style.display = "none";
+            }
+
 
 
 
