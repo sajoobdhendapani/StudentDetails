@@ -10,7 +10,7 @@ namespace StudentDetails.DataAccessLayer
         public void Insert(StudentDetail details);
         public IEnumerable<StudentDetail> GetallRecords();
         public void Update(long id, StudentDetail value);
-        public StudentDetail GetByid(long id);
+        public void GetByid(long id);
         public void Delete(long id);
     }
 }

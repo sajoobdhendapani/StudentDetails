@@ -1,0 +1,198 @@
+﻿@model StudentDetails.DataAccessLayer.StudentDetail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>StudentDetail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AGE" class="control-label"></label>
+                <input asp-for="AGE" class="form-control" />
+                <span asp-validation-for="AGE" id="txtage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoblieNumber" class="control-label"></label>
+                <input asp-for="MoblieNumber" class="form-control" />
+                <span asp-validation-for="MoblieNumber" id="txtmobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" id="txtemail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <select asp-for="Subject" id="drpsub" class="form-control"></select>
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Create" id="create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+
+     $(document).ready(function () {
+            debugger;
+
+
+
+            $("#create").click(function () {
+                debugger;
+
+                validate();
+
+            });
+
+
+            $.ajax({
+                type: "GET",
+                url: "/api/depart",
+                data: "{}",
+                success: function (data) {
+                    var string = '<option value="-1">--- Please Select ---</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $("#drpsub").html(string);
+                }
+            });
+
+
+
+        });
+
+
+        function validate() {
+
+            var name = document.getElementById("Name").value;
+
+            var age = document.getElementById("AGE").value;
+
+            var mobile = document.getElementById("MoblieNumber").value;
+
+            //var gender = document.getElementById("Gender").value;
+
+            var email = document.getElementById("Email").value;
+
+            var dob = document.getElementById("DOB").value;
+
+
+
+
+
+            var isvalid = true;
+
+
+            var spanname = document.getElementById("txtname");
+            if (name == "" || name.length == 0) {
+                spanname.innerText = "Please Enter Your Name";
+                spanname.style.display = "block";
+
+                isvalid = false;
+            }
+            else {
+                spanname.style.display = "none";
+            }
+
+
+
+            var spanage = document.getElementById("txtage");
+            if (age <= 0) {
+                spanage.innerText = "Please Enter Valid Age";
+                spanage.style.display = "block";
+
+                isvalid = false;
+            }
+            else {
+                spanage.style.display = "none";
+            }
+
+            var spanmobile = document.getElementById("txtmobile");
+            if (mobile.length != 10) {
+                spanmobile.innerText = "Please Enter Valid 10-Digit Phone Number";
+                spanmobile.style.display = "block";
+
+                isvalid = false;
+            }
+            else {
+                spanmobile.style.display = "none";
+            }
+
+
+            var spanemail = document.getElementById("txtemail");
+
+            if (email == "") {
+                spanemail.innerText = "Please Enter Valid Email Address";
+                spanemail.style.display = "block";
+                isValid = false;
+            }
+            else {
+                spanemail.style.display = "none";
+            }
+
+
+            var spandob = document.getElementById("txtdob");
+            debugger;
+            if (dob === "" || dob == "0001-01-01T00:00")
+            {
+                spandob.innerText = "Please Enter Your DOB";
+                spandob.style.display = "block";
+                isvalid = false;
+            }
+            else {
+                spandob.style.display = "none";
+            }
+
+                var spansub = document.getElementById("txtsubject");
+
+                if (sub >= 0 || sub == "Please select") {
+                    spansub.innerText = "Please Enter Your Subject";
+                    spansub.style.display = "block";
+                    isvalid = false;
+                }
+                else {
+                    spansub.style.display = "none";
+                }
+
+
+
+           
+            return isvalid;
+        }
+
+    </script>
+}
+
+
+
+

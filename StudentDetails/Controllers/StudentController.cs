@@ -105,5 +105,46 @@ namespace StudentDetails.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        [Route("~/api/depart")]
+        public ActionResult Subject()
+        {
+            try
+            {
+                var get = Getvalue();
+                return Ok(get.ToList());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+
+            }
+
+        }
+
+        private List<Subject> Getvalue()
+        {
+
+            List<Subject> depart = new List<Subject>();
+            Subject input = new Subject();
+            input.ID = 1;
+            input.Name = "ECE";
+            depart.Add(input);
+
+            Subject inner = new Subject();
+            inner.ID = 2;
+            inner.Name = "CSE";
+            depart.Add(inner);
+
+            Subject inter = new Subject();
+            inter.ID = 3;
+            inter.Name = "MECH";
+            depart.Add(inter);
+            return depart;
+
+        }
     }
 }
