@@ -51,7 +51,7 @@ namespace StudentDetails.Controllers
         // POST: Student/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StudentDetail val)
+        public ActionResult Creates(StudentDetail val)
         {
             try
             {

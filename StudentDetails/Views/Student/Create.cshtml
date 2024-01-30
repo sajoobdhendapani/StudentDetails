@@ -29,12 +29,16 @@
             </div>
 
             <div class="radio-btn label">
-                <label for="radio">Male</label>
+                <label>Gender</label>
                 <input type="radio" name="radio" id="male" value="male">
-                <label for="radio">Female</label>
+                <label for="radio">Male</label>
                 <input type="radio" name="radio" id="female" value="female">
+                <label for="radio">Female</label>
             </div>
-            <div id="gender-error" style="color: red; display: none">Please select the gender</div>
+            <div>
+                <span asp-validation-for="Gender"id="errgender"class="text-danger"></span>
+            </div>
+            @*<div id="gender-error" style="color: red; display: none">Please select the gender</div>*@
             <div class="form-group">
                 <label asp-for="MoblieNumber" class="control-label"></label>
                 <input asp-for="MoblieNumber" class="form-control" />
@@ -66,15 +70,59 @@
 
         $(document).ready(function () {
             debugger;
-
-
-
             $("#create").click(function () {
                 debugger;
+                var radios = document.getElementsByName("radio");
+                var val2 = ""
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        val2 = radios[i].value;
+                        break;
+                    }
+                }
+                if (validate()) {
+                    var name = document.getElementById("Name").value;
+                    var age = document.getElementById("AGE").value;
+                    var mobile = document.getElementById("MoblieNumber").value;
+                    var gender = document.getElementById("radio")
+                    var email = document.getElementById("Email").value;
+                    var dob = document.getElementById("DOB").value;
+                    var spansub = document.getElementById("drpsub");
+                    var sub = spansub.options[spansub.selectedIndex].value;
 
-                validate();
+                    var postdate =
+                    {
+                        "Name": name,
+                        "AGE": age,
+                        "DOB": dob,
+                        "Gender": gender,
+                        "Email": email,
+                        "MobileNumber": mobile,
+                        "Subject": sub
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/Student/Creates",
+                        data: postdate,
+                        success: function (data) {
+                            alert("success");
+
+                        },
+                        error: function (ex)
+                        {
+                            alert("error");
+                     }
+                    });
+
+
+                    
+                }
 
             });
+                
+        
+
+       
 
 
             $.ajax({
@@ -103,7 +151,7 @@
 
             var mobile = document.getElementById("MoblieNumber").value;
 
-            //var gender = document.getElementById("Gender").value;
+            var gender = document.getElementById("radio")
 
             var email = document.getElementById("Email").value;
 
@@ -180,8 +228,8 @@
             var spansub = document.getElementById("drpsub");
             var sub = spansub.options[spansub.selectedIndex].value;
             var spansubject = document.getElementById("drpsubject");
-            if (sub == "" || sub == -1 || sub == 0) {
-                spansub.style.borderColor = "red";
+            if (sub == "" || sub == -1 || sub == 0)
+            {
                 spansubject.innerText = "Please Enter Your Subject";
                 spansubject.style.display = "block";
                 isvalid = false;
@@ -194,23 +242,33 @@
 
                    
             var radios = document.getElementsByName("radio");
-                        var value = ""
-                        for (var i = 0, length = radios.length; i < length; i++) {
-                if (radios[i].checked) {
-                            value = radios[i].value;
+            var val=""
+            for (var i = 0, length = radios.length; i < length; i++)
+            {
+                if (radios[i].checked) 
+                {
+                            val = radios[i].val;
                         break;
                 }
             }
 
-                        document.getElementById("gender-error").style.display = !value ? "block" : "none";
-                        alert(value ? "selected " + value : "no value selected");
-        
-    
+            var gender = document.getElementById("errgender");
+            if (!val)
+            {
+                gender.innerText = "Please Select Your Gender";
+                gender.style.display = "block";
+            }
+            else
+            {
+                gender.style.display = "none";
+
+            }
+
+            return isvalid;
+        }
 
 
 
-    return isvalid;
-}
 
     </script>
 }
