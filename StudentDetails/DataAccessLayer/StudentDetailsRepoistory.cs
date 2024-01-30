@@ -29,7 +29,7 @@ namespace StudentDetails.DataAccessLayer
         {
             try
             {
-                
+                var update = _context.Database.ExecuteSqlRaw($"");
             }
             catch 
             {
