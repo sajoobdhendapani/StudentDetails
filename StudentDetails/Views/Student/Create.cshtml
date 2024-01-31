@@ -29,7 +29,7 @@
             </div>
 
             <div class="radio-btn label">
-                <label>Gender</label>
+                <label id="radgender">Gender</label>
                 <input type="radio" name="radio" id="male" value="male">
                 <label for="radio">Male</label>
                 <input type="radio" name="radio" id="female" value="female">
@@ -72,40 +72,48 @@
             debugger;
             $("#create").click(function () {
                 debugger;
-                var radios = document.getElementsByName("radio");
-                var val2 = ""
-                for (var i = 0, length = radios.length; i < length; i++) {
-                    if (radios[i].checked) {
-                        val2 = radios[i].value;
-                        break;
-                    }
-                }
+                
                 if (validate()) {
                     var name = document.getElementById("Name").value;
                     var age = document.getElementById("AGE").value;
                     var mobile = document.getElementById("MoblieNumber").value;
-                    var gender = document.getElementById("radio")
+                   // var gender = document.getElementById("radio")
                     var email = document.getElementById("Email").value;
                     var dob = document.getElementById("DOB").value;
                     var spansub = document.getElementById("drpsub");
                     var sub = spansub.options[spansub.selectedIndex].value;
+                    var radios = document.getElementsByName("radio");
+                    var radgender = ""
 
+                    for (var i = 0, length = radios.length; i < length; i++) {
+                        if (radios[i].checked) {
+                            radgender = radios[i].value;
+                            break;
+                        }
+                    }
+
+
+                    debugger;
                     var postdate =
                     {
                         "Name": name,
-                        "AGE": age,
                         "DOB": dob,
-                        "Gender": gender,
-                        "Email": email,
+                        "AGE": age,
+                        "Gender": radgender,
                         "MobileNumber": mobile,
+                        "Email": email,
                         "Subject": sub
                     }
+                    debugger;
                     $.ajax({
+                        
                         type: "POST",
-                        url: "/Student/Creates",
+                        url: "/Student/Create",
                         data: postdate,
-                        success: function (data) {
+                        success: function (data)
+                        {
                             alert("success");
+                            window.location.href = "/student/index";
 
                         },
                         error: function (ex)
@@ -151,8 +159,6 @@
 
             var mobile = document.getElementById("MoblieNumber").value;
 
-            var gender = document.getElementById("radio")
-
             var email = document.getElementById("Email").value;
 
             var dob = document.getElementById("DOB").value;
@@ -171,7 +177,8 @@
 
                 isvalid = false;
             }
-            else {
+            else
+            {
                 spanname.style.display = "none";
             }
 
@@ -184,7 +191,8 @@
 
                 isvalid = false;
             }
-            else {
+            else
+            {
                 spanage.style.display = "none";
             }
 
@@ -195,7 +203,8 @@
 
                 isvalid = false;
             }
-            else {
+            else
+            {
                 spanmobile.style.display = "none";
             }
 
@@ -207,7 +216,8 @@
                 spanemail.style.display = "block";
                 isValid = false;
             }
-            else {
+            else
+            {
                 spanemail.style.display = "none";
             }
 
@@ -219,7 +229,8 @@
                 spandob.style.display = "block";
                 isvalid = false;
             }
-            else {
+            else
+            {
                 spandob.style.display = "none";
             }
 
@@ -234,8 +245,9 @@
                 spansubject.style.display = "block";
                 isvalid = false;
             }
-            else {
-                spansubject.style.borderColor = "black";
+            else
+            {
+                
                 spansubject.style.display = "none";
             }
 
@@ -247,7 +259,7 @@
             {
                 if (radios[i].checked) 
                 {
-                            val = radios[i].val;
+                            val = radios[i].value;
                         break;
                 }
             }
@@ -257,6 +269,7 @@
             {
                 gender.innerText = "Please Select Your Gender";
                 gender.style.display = "block";
+                isvalid = false;
             }
             else
             {

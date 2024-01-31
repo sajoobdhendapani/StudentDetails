@@ -37,6 +37,7 @@ namespace StudentDetails.Controllers
         // GET: Student/Details/5
         public ActionResult Details(int id)
         {
+           
             return View();
         }
 
@@ -50,8 +51,8 @@ namespace StudentDetails.Controllers
 
         // POST: Student/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Creates(StudentDetail val)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(StudentDetail val)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace StudentDetails.Controllers
             {
                 return View("Error");
             }
-        }
+       }
 
         // GET: Student/Edit/5
         public ActionResult Edit(int id)
