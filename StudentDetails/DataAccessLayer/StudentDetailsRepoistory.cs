@@ -29,11 +29,11 @@ namespace StudentDetails.DataAccessLayer
         {
             try
             {
-                var update = _context.Database.ExecuteSqlRaw($"");
+                var update = _context.Database.ExecuteSqlRaw($" update StudentDetail set name='{value.Name}',DOB={value.DOB},AGE={value.AGE},Gender='{value.Gender}',MobileNumber={value.MobileNumber},Email='{value.Email}',subject='{value.Subject}' where StudentId={id} ");
             }
-            catch 
+            catch (Exception ex)
             {
-                
+                throw;
             }
         }
         public void Delete(long id)
@@ -59,14 +59,16 @@ namespace StudentDetails.DataAccessLayer
                 throw;
             }
         }
-        public void GetByid(long id)
+        public StudentDetail GetByid(long id)
         {
             try
             {
+                var result = _context.StudentDetail.FromSqlRaw($" select *from StudentDetail where StudentId= {id} ");
+                return result.ToList().FirstOrDefault();
             }
-            catch 
+            catch (Exception ex)
             {
-                
+                throw;
             }
         }
     }

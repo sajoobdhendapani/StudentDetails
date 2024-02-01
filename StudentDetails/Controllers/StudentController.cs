@@ -37,16 +37,43 @@ namespace StudentDetails.Controllers
         // GET: Student/Details/5
         public ActionResult Details(int id)
         {
+            try
+            {
+                var result = _add.GetByid(id);
+                return View("Details", result);
+            }
+            catch
+            {
+                return View();
+            }
            
-            return View();
+            //return View();
         }
 
         // GET: Student/Create
-        public ActionResult Create()
+        public ActionResult Create(long? id)
         {
-            var gat = new StudentDetail();
+            try
+            {
+                if(id.HasValue)
+                {
+                    var student = _add.GetByid(id.Value);
+                    return View("Create", student);
 
-            return View("Create", gat);
+                }
+                else
+                {
+                    var result = new StudentDetail();
+                    result.Gender = "M";
+                    return View("Create", result);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+            }
+
         }
 
         // POST: Student/Create
@@ -56,8 +83,16 @@ namespace StudentDetails.Controllers
         {
             try
             {
-                _add.Insert(val);
-                return RedirectToAction(nameof(Index));
+                if (val.StudentId == 0)
+                {
+                    _add.Insert(val);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    _add.Update(val.StudentId, val);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
@@ -68,17 +103,30 @@ namespace StudentDetails.Controllers
         // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            var result = _add.GetByid(id);
+            return View("Edit", result);
         }
 
         // POST: Student/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, StudentDetail data)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(ModelState.IsValid)
+                {
+                    _add.Update(id, data);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+
+                    return View("Edit", data);
+                }
+                
+               
             }
             catch
             {

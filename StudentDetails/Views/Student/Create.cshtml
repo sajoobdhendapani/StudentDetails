@@ -3,8 +3,15 @@
 @{
     ViewData["Title"] = "Create";
 }
+@{ 
+    var View = "Create";
+    if(Model.StudentId>0)
+    {
+        View = "Update";
+    }
+}
 
-<h1>Create</h1>
+<h1>@View</h1>
 
 <h4>StudentDetail</h4>
 <hr />
@@ -14,25 +21,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" placeholder="Enter your name" />
                 <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DOB" class="control-label"></label>
-                <input asp-for="DOB" class="form-control" />
+                <input asp-for="DOB" class="form-control" placeholder="Enter your Dob" />
                 <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AGE" class="control-label"></label>
-                <input asp-for="AGE" class="form-control" />
+                <input asp-for="AGE" class="form-control" placeholder="Enter  Age" />
                 <span asp-validation-for="AGE" id="txtage" class="text-danger"></span>
             </div>
 
             <div class="radio-btn label">
                 <label id="radgender">Gender</label>
-                <input type="radio" name="radio" id="male" value="male">
+                <input asp-for="Gender" type="radio" name="radio" id="male" value="male">
                 <label for="radio">Male</label>
-                <input type="radio" name="radio" id="female" value="female">
+                <input  type="radio" asp-for="Gender" name="radio" id="female" value="female">
                 <label for="radio">Female</label>
             </div>
             <div>
@@ -41,12 +48,12 @@
             @*<div id="gender-error" style="color: red; display: none">Please select the gender</div>*@
             <div class="form-group">
                 <label asp-for="MobileNumber" class="control-label"></label>
-                <input asp-for="MobileNumber" class="form-control" />
+                <input asp-for="MobileNumber" class="form-control" placeholder="Enter MobileNumber" />
                 <span asp-validation-for="MobileNumber" id="txtmobile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" placeholder="Enter your Email ID" />
                 <span asp-validation-for="Email" id="txtemail" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,7 +62,7 @@
                 <span asp-validation-for="Subject" id="drpsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" value="Create" id="create" class="btn btn-primary" />
+                <input type="button" value="Create" id="@View" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -92,6 +99,7 @@
                         }
                     }
 
+                    
 
                     debugger;
                     var postdate =
@@ -128,25 +136,19 @@
 
             });
                 
-        
-
-       
-
-
+            debugger;
             $.ajax({
                 type: "GET",
                 url: "/api/depart",
                 data: "{}",
                 success: function (data) {
-                    var string = '<option value="-1">--- Please Select ---</option>';
+                    var string = '<option value="-1">--- Please Select your subject ---</option>';
                     for (var i = 0; i < data.length; i++) {
                         string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                     }
                     $("#drpsub").html(string);
                 }
             });
-
-
 
         });
 
