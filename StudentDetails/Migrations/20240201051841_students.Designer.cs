@@ -10,8 +10,8 @@ using StudentDetails.DataAccessLayer;
 namespace StudentDetails.Migrations
 {
     [DbContext(typeof(SampleDbContext))]
-    [Migration("20240123065208_Students")]
-    partial class Students
+    [Migration("20240201051841_students")]
+    partial class students
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace StudentDetails.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("MoblieNumber")
+                    b.Property<long>("MobileNumber")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")

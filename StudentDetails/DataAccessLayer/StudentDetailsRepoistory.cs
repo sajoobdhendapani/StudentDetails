@@ -18,7 +18,7 @@ namespace StudentDetails.DataAccessLayer
         {
             try
             {
-                _context.Database.ExecuteSqlRaw($"exec InsertStudentDetails '{details.Name}','{details.DOB}','{details.AGE}','{details.Gender}','{details.MoblieNumber}' ,'{details.Email}','{details.Subject}'");
+                _context.Database.ExecuteSqlRaw($"exec InsertStudentDetails '{details.Name}','{details.DOB}','{details.AGE}','{details.Gender}','{details.MobileNumber}' ,'{details.Email}','{details.Subject}'");
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace StudentDetails.DataAccessLayer
         public DateTime DOB { get; set; }
         public int AGE { get; set; }
         public string Gender { get; set; }
-        public long MoblieNumber { get; set; }
+        public long MobileNumber { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }
     }

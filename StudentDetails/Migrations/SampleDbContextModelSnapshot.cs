@@ -38,7 +38,7 @@ namespace StudentDetails.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("MoblieNumber")
+                    b.Property<long>("MobileNumber")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")

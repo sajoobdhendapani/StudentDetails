@@ -40,9 +40,9 @@
             </div>
             @*<div id="gender-error" style="color: red; display: none">Please select the gender</div>*@
             <div class="form-group">
-                <label asp-for="MoblieNumber" class="control-label"></label>
-                <input asp-for="MoblieNumber" class="form-control" />
-                <span asp-validation-for="MoblieNumber" id="txtmobile" class="text-danger"></span>
+                <label asp-for="MobileNumber" class="control-label"></label>
+                <input asp-for="MobileNumber" class="form-control" />
+                <span asp-validation-for="MobileNumber" id="txtmobile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -76,7 +76,7 @@
                 if (validate()) {
                     var name = document.getElementById("Name").value;
                     var age = document.getElementById("AGE").value;
-                    var mobile = document.getElementById("MoblieNumber").value;
+                    var mobile = document.getElementById("MobileNumber").value;
                    // var gender = document.getElementById("radio")
                     var email = document.getElementById("Email").value;
                     var dob = document.getElementById("DOB").value;
@@ -157,7 +157,7 @@
 
             var age = document.getElementById("AGE").value;
 
-            var mobile = document.getElementById("MoblieNumber").value;
+            var mobile = document.getElementById("MobileNumber").value;
 
             var email = document.getElementById("Email").value;
 

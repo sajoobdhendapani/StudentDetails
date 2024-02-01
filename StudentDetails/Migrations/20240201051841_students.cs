@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentDetails.Migrations
 {
-    public partial class Students : Migration
+    public partial class students : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace StudentDetails.Migrations
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AGE = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MoblieNumber = table.Column<long>(type: "bigint", nullable: false),
+                    MobileNumber = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
