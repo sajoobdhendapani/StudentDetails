@@ -44,7 +44,7 @@ namespace StudentDetails.Controllers
             }
             catch
             {
-                return View();
+                return View("Error");
             }
            
             //return View();
@@ -110,7 +110,7 @@ namespace StudentDetails.Controllers
 
         // POST: Student/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Edit(int id, StudentDetail data)
         {
             try
@@ -130,7 +130,7 @@ namespace StudentDetails.Controllers
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 

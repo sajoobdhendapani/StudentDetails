@@ -29,7 +29,7 @@ namespace StudentDetails.DataAccessLayer
         {
             try
             {
-                var update = _context.Database.ExecuteSqlRaw($" update StudentDetail set name='{value.Name}',DOB={value.DOB},AGE={value.AGE},Gender='{value.Gender}',MobileNumber={value.MobileNumber},Email='{value.Email}',subject='{value.Subject}' where StudentId={id} ");
+                var result = _context.Database.ExecuteSqlRaw($" update StudentDetail set Name='{value.Name}','DOB={value.DOB}',AGE={value.AGE},Gender='{value.Gender}',MobileNumber={value.MobileNumber},Email='{value.Email}',Subject='{value.Subject}' where StudentId={id} ");
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace StudentDetails.DataAccessLayer
         {
             try
             {
-                var result = _context.StudentDetail.FromSqlRaw($" select *from StudentDetail where StudentId= {id} ");
+                var result = _context.StudentDetail.FromSqlRaw($" exec GetnyidStudentdetails {id} ");
                 return result.ToList().FirstOrDefault();
             }
             catch (Exception ex)
