@@ -2,16 +2,16 @@
 
 @{
     ViewData["Title"] = "Create";
-}
-@{ 
-    var View = "Create";
-    if(Model.StudentId>0)
+    var text = "Create";
+
+
+    if (Model.StudentId>0)
     {
-        View = "Update";
+        text = "Update";
     }
 }
 
-<h1>@View</h1>
+<h1>@text</h1>
 
 <h4>StudentDetail</h4>
 <hr />
@@ -21,6 +21,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
+                <input asp-for="StudentId" id="StudentId" type="hidden" />
                 <input asp-for="Name" class="form-control" placeholder="Enter your name" />
                 <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
             </div>
@@ -58,12 +59,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
+                <input type="hidden" id="hdnSubject" asp-for="Subject" />
                 <select asp-for="Subject" id="drpsub" class="form-control"></select>
                 <span asp-validation-for="Subject" id="drpsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" value="@View" id="Create" class="btn btn-primary" />
+                <input type="button" id="create" value="@text"  class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
@@ -77,6 +80,7 @@
 
         $(document).ready(function () {
             debugger;
+
             $("#create").click(function () {
                 debugger;
                 
@@ -102,8 +106,11 @@
                     
 
                     debugger;
+
+                    var Studentid = document.getElementById("StudentId").value
                     var postdate =
                     {
+                        "StudentId": Studentid,
                         "Name": name,
                         "DOB": dob,
                         "AGE": age,
@@ -131,6 +138,7 @@
                     });
 
 
+
                     
                 }
 
@@ -143,10 +151,15 @@
                 data: "{}",
                 success: function (data) {
                     var string = '<option value="-1">--- Please Select your subject ---</option>';
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++)
+                    {
                         string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                     }
                     $("#drpsub").html(string);
+
+                    alert($("#hdnSubject").val());
+
+                    $("#drpsub").val($("#hdnSubject").val());
                 }
             });
 

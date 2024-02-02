@@ -10,6 +10,13 @@ namespace StudentDetails.DataAccessLayer
 {
     public class StudentDetail
     {
+        public StudentDetail()
+        {
+            Subject = "-1";
+            DOB = DateTime.Now;
+        }
+
+
         [Key]
         public int StudentId { get; set; }
         public string Name { get; set; }

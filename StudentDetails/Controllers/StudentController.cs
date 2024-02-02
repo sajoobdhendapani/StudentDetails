@@ -64,7 +64,7 @@ namespace StudentDetails.Controllers
                 else
                 {
                     var result = new StudentDetail();
-                    result.Gender = "M";
+                  
                     return View("Create", result);
                 }
 
@@ -115,16 +115,9 @@ namespace StudentDetails.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
-                {
-                    _add.Update(id, data);
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-
-                    return View("Edit", data);
-                }
+                _add.Update(id, data);
+                var result = _add.GetallRecords();
+                return View("text", result);
                 
                
             }
